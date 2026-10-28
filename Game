@@ -1,0 +1,118 @@
+#include <stdio.h>
+int realgame(int avatar,int x,int y,int z) {
+    {int real=0;
+        int attempts = 1;
+        while (real == 0) {
+            printf("\tEscape the matrix!!!\t\n");
+            printf("\t1D\t 2D\t 3D");
+
+            int a[3][3][3]={0};
+            a[2 -(y - 1)][z - 1][x - 1] = avatar;
+            int length = sizeof(a)/sizeof(a[0]);
+            int i, j,h;
+            for (i = 0; i < length; i++) {
+                printf("\n");
+                for (j = 0; j < length; j++) {
+                    printf("\t");
+
+                    for (h = 0; h <length;h++) {
+                        printf("%d", a[i][j][h]);
+                    }
+                }
+            }
+            printf("\nYou are currently at the coordinates:\n X - %d Y - %d Z - %d\nPlease insert where would you like to travel:", x,y,z);
+            printf("X:");
+            scanf("%d", &x);
+            printf("Y:");
+            scanf("%d", &y);
+            printf("Z:");
+            scanf("%d", &z);
+            attempts++;
+            if (x < 1 || y < 1 || z<1 ||x >3||y > 3 || z > 3) {
+                real++;
+            }
+        }
+        printf("\n---------------------------------------------------\n");
+        printf("Congratulations!!! You escaped the matrix!\n");
+        printf("\t\t  %d\n", avatar);
+        printf("Tries: %d", attempts);
+        printf("\n---------------------------------------------------\n");
+
+        }
+    return 0;
+    }
+    int game(int avatar) {
+        printf("\tEscape the matrix!!!\t\n");
+    printf("\t1D\t 2D\t 3D");
+
+        int a[3][3][3]={0};
+        a[1][1][1] = avatar;
+        int length = sizeof(a)/sizeof(a[0]);
+        int x,y,z;
+        int i, j,h;
+        for (i = 0; i < length; i++) {
+            printf("\n");
+            for (j = 0; j < length; j++) {
+                printf("\t",j);
+
+                for (h = 0; h <length;h++) {
+                    printf("%d", a[i][j][h]);
+                }
+            }
+        }
+        printf("\nYou are currently at the coordinates:\n X - 2 Y - 2 Z - 2\nPlease insert where would you like to travel:\n");
+        printf("X:");
+        scanf("%d", &x);
+        printf("Y:");
+        scanf("%d", &y);
+        printf("Z:");
+        scanf("%d", &z);
+        if (x <= 0 || y <=0 || z <=0 ||x >= 4 || y >=4 || z >= 4) {
+            printf("\n---------------------------------------------------\n");
+            printf("Congratulations!!! You escaped the matrix!\n");
+            printf("\t\t  %d", avatar);
+            printf("\nFirst Attempt Badge Acquired!!");
+            printf("\n---------------------------------------------------\n");
+        }
+        else {
+            realgame(avatar,x,y,z);
+        }
+    return 0;
+    }
+    int main(void) {
+        printf("\tEscape the matrix!!!\t\n");
+    printf("\t1D\t 2D\t 3D");
+        int a[3][3][3]={0};
+        int length = sizeof(a)/sizeof(a[0]);
+        int i, j,h;
+        for (i = 0; i < length; i++) {
+            printf("\n");
+            for (j = 0; j < length; j++) {
+                printf("\t");
+
+                for (h = 0; h <length;h++) {
+                    printf("%d", a[i][j][h]);
+                }
+            }
+        }
+        printf("\n---------------------------------------------------");
+        int avatar = 0;
+        int valido = 0;
+        while (!valido) {
+            printf("\nChoose your avatar(1-9):");
+            if (scanf("%d", &avatar) != 1){
+                int c;
+                while ((c = getchar()) != '\n' && c != EOF) { }
+                if (c == EOF) return 1;
+                printf("Invalid input.");
+            } else if (avatar < 1 || avatar > 9) {
+                printf("Please choose another avatar.");
+            } else {
+                valido = 1;
+
+                printf("\n---------------------------------------------------\n");
+                game(avatar);
+            }
+        }
+        return 0;
+    }
